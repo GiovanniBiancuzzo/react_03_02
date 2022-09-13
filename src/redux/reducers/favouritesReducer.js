@@ -1,7 +1,9 @@
-import { ADD_TO_FAVOURITE, REMOVE_FROM_FAVOURITE } from "../actions";
+import { ADD_TO_FAVOURITE, REMOVE_FROM_FAVOURITE, LOADED_FAVOURITES, GET_FAVOURITES_ERROR } from "../actions";
 
 const initialState = {
-    list: []
+    list: [],
+    loading: true,
+    error: false
 };
 
 const favouritesReducer = (state = initialState, action) => {
@@ -14,6 +16,16 @@ const favouritesReducer = (state = initialState, action) => {
             ...state,
             list: state.list.filter(company => company.company_name !== action.payload.company_name)
         };
+        case LOADED_FAVOURITES:
+            return {
+                ...state,
+                loading: !state.loading
+            };
+        case GET_FAVOURITES_ERROR:
+            return {
+                ...state,
+                error: true
+            };
         default: return state;
     }
 };

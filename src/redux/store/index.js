@@ -17,6 +17,7 @@ const mainReducer = combineReducers({
 const persistConfig = ({
     key: 'root',//da dove vogliamo cominciare a salvare informazioni
     storage,//o anche solo 'storage'
+    blacklist: ['search', 'job'],
     transforms: [encryptTransform({
         secretKey: process.env.REACT_APP_PERSIST_KEY//chiave contenuta in .env
     })]

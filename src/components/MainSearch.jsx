@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addQueryAction, addToCatalogueAction } from "../redux/actions";
 import Job from "./Job";
@@ -16,6 +16,7 @@ const MainSearch = () => {
         dispatch(addQueryAction(e.target.value));
         // setQuery(e.target.value);
     };
+    const loading = useSelector((state) => state.job.loading);
     // useEffect(() => {
     //     console.log("ricerca istantanea");
     // });
@@ -41,11 +42,18 @@ const MainSearch = () => {
                         />
                     </Form>
                 </Col>
-                <Col xs={10} className="mx-auto mb-5">
-                    {jobs.map((jobData) => (
-                        <Job key={jobData._id} data={jobData} />
-                    ))}
-                </Col>
+                {loading ? (
+                    <Col xs={10} className="mx-auto mt-5 text-center">
+                        {" "}
+                        <Spinner animation="grow" variant="primary" />
+                    </Col>
+                ) : (
+                    <Col xs={10} className="mx-auto mb-5">
+                        {jobs.map((jobData) => (
+                            <Job key={jobData._id} data={jobData} />
+                        ))}
+                    </Col>
+                )}
             </Row>
         </Container>
     );

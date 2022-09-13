@@ -4,6 +4,9 @@ export const ADD_TO_CATALOGUE = 'ADD_TO_CATALOGUE';
 export const ADD_QUERY = 'ADD_QUERY';
 export const LOADED_CATALOGUE = 'LOADED_CATALOGUE';
 export const GET_CATALOGUE_ERROR = 'GET_CATALOGUE_ERROR';
+export const LOADED_FAVOURITES = 'LOADED_FAVOURITES';
+export const GET_FAVOURITES_ERROR = 'GET_FAVOURITES_ERROR';
+
 // export const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search=';
 //action creator
 export const addToFavouriteAction = (company) => ({
@@ -48,7 +51,7 @@ export const addToCatalogueAction = (query) => {
                     dispatch({
                         type: LOADED_CATALOGUE,
                     });
-                }, 500);
+                }, 200);
             })
             .catch(error => {
                 console.log(error);
