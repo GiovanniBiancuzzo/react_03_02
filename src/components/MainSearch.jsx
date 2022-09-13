@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Form, Spinner, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addQueryAction, addToCatalogueAction } from "../redux/actions";
 import Job from "./Job";
@@ -17,6 +16,7 @@ const MainSearch = () => {
         // setQuery(e.target.value);
     };
     const loading = useSelector((state) => state.job.loading);
+    const error = useSelector((state) => state.job.error);
     // useEffect(() => {
     //     console.log("ricerca istantanea");
     // });
@@ -46,6 +46,12 @@ const MainSearch = () => {
                     <Col xs={10} className="mx-auto mt-5 text-center">
                         {" "}
                         <Spinner animation="grow" variant="primary" />
+                    </Col>
+                ) : error ? (
+                    <Col xs={10} className="mx-auto mt-5 text-center">
+                        <Alert variant="danger">
+                            Oh no, error in loading jobs
+                        </Alert>
                     </Col>
                 ) : (
                     <Col xs={10} className="mx-auto mb-5">
